@@ -1,0 +1,20 @@
+name: Build and test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  macos:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show toolchain
+        run: swift --version
+      - name: Run tests
+        run: bash scripts/test.sh
+      - name: Build local app bundle
+        run: bash scripts/build-app.sh
